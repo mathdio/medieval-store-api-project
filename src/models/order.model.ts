@@ -7,7 +7,6 @@ export default async function getAll() {
     INNER JOIN Trybesmith.products AS p
     ON o.id = p.order_id
     GROUP BY o.id`,
-    // 'SELECT * FROM Trybesmith.orders',
   );
 
   return orders;

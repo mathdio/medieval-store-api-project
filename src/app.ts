@@ -4,7 +4,7 @@ import {
   createProductController,
   getAllProductsController,
 } from './controllers/products.controller';
-import createUserController from './controllers/users.controller';
+import createUserController, { loginUserController } from './controllers/users.controller';
 
 const app = express();
 
@@ -17,5 +17,7 @@ app.get('/products', getAllProductsController);
 app.post('/users', createUserController);
 
 app.get('/orders', getAllOrdersController);
+
+app.post('/login', loginUserController);
 
 export default app;

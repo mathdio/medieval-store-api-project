@@ -1,7 +1,13 @@
-import getAll from '../models/order.model';
+import { getAll, create } from '../models/order.model';
 
-export default async function getAllOrders() {
+export async function getAllOrders() {
   const orders = await getAll();
 
   return orders;
+}
+
+export async function createOrder(userId: number, productsIds: number[]) {
+  const order = await create(userId, productsIds);
+
+  return order;
 }

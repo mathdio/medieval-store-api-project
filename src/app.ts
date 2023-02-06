@@ -1,11 +1,12 @@
 import express from 'express';
 import 'express-async-errors';
-import getAllOrdersController from './controllers/orders.controller';
+import { getAllOrdersController, createOrderController } from './controllers/orders.controller';
 import {
   createProductController,
   getAllProductsController,
 } from './controllers/products.controller';
 import createUserController, { loginUserController } from './controllers/users.controller';
+import auth from './middlewares/auth';
 import errorMiddleware from './middlewares/errorMiddleware';
 import loginValidation from './middlewares/loginValidation';
 import productAmountValidation from './middlewares/productAmountValidation';
@@ -34,6 +35,8 @@ app.post(
 app.get('/orders', getAllOrdersController);
 
 app.post('/login', loginValidation, loginUserController);
+
+app.post('/orders', auth, createOrderController);
 
 app.use(errorMiddleware);
 

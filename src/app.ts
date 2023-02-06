@@ -10,6 +10,9 @@ import errorMiddleware from './middlewares/errorMiddleware';
 import loginValidation from './middlewares/loginValidation';
 import productAmountValidation from './middlewares/productAmountValidation';
 import productNameValidation from './middlewares/productNameValidation';
+import {
+  usernameValidation,
+  vocationValidation, levelValidation, passwordValidation } from './middlewares/usernameValidation';
 
 const app = express();
 
@@ -19,7 +22,14 @@ app.post('/products', productNameValidation, productAmountValidation, createProd
 
 app.get('/products', getAllProductsController);
 
-app.post('/users', createUserController);
+app.post(
+  '/users',
+  usernameValidation,
+  vocationValidation,
+  levelValidation,
+  passwordValidation,
+  createUserController,
+);
 
 app.get('/orders', getAllOrdersController);
 

@@ -9,6 +9,11 @@ export async function createUser(user: IUser) {
 
 export async function loginUser(user: { username: string, password: string }) {
   const userLoggedIn = await login(user);
+  if (!userLoggedIn) {
+    const error = new Error('Username or password invalid');
+    error.name = 'UNAUTHORIZED';
+    throw error;
+  }
 
   return userLoggedIn;
 }

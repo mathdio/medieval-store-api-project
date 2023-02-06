@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export default function errorMiddleware(
   error: Error,
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction,
 ) {
@@ -10,11 +10,11 @@ export default function errorMiddleware(
 
   switch (name) {
     case 'BAD_REQUEST':
-      res.status(400).json({ message });
-      break;
+      return res.status(400).json({ message });
     case 'UNAUTHORIZED':
-      res.status(401).json({ message });
-      break;
+      return res.status(401).json({ message });
+    case 'UNPROCESSABLE_ENTITY':
+      return res.status(422).json({ message });
     default:
       console.log(error);
       return res.status(500);

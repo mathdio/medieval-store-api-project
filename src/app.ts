@@ -8,12 +8,14 @@ import {
 import createUserController, { loginUserController } from './controllers/users.controller';
 import errorMiddleware from './middlewares/errorMiddleware';
 import loginValidation from './middlewares/loginValidation';
+import productAmountValidation from './middlewares/productAmountValidation';
+import productNameValidation from './middlewares/productNameValidation';
 
 const app = express();
 
 app.use(express.json());
 
-app.post('/products', createProductController);
+app.post('/products', productNameValidation, productAmountValidation, createProductController);
 
 app.get('/products', getAllProductsController);
 

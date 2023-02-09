@@ -20,15 +20,13 @@ export async function create(userId: number, productsIds: number[]) {
     [userId],
   );
 
-  Promise.all(
-    productsIds.map(async (product) => {
-      await connection.execute(
-        `UPDATE Trybesmith.products
-         SET order_id = ?
-         WHERE id = ?`,
-        [insertId, product],
-      );
-    }),
+  await Promise.all(
+    productsIds.map((product) => connection.execute(
+      `UPDATE Trybesmith.products
+      SET order_id = ?
+      WHERE id = ?`,
+      [insertId, product],
+    )),
   );
 
   return { userId, productsIds };
